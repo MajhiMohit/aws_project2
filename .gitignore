@@ -1,0 +1,55 @@
+# ==============================================================================
+# Terraform .gitignore — AWS Landing Zone
+# ==============================================================================
+
+# Local .terraform directory (downloaded providers & modules)
+**/.terraform/
+.terraform/
+
+# Terraform lock file (keep this — tracks provider versions)
+# .terraform.lock.hcl   ← intentionally NOT ignored
+
+# Terraform state files — NEVER commit state to git
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Terraform plan output files
+tfplan
+*.tfplan
+*.plan
+
+# Variable files that may contain sensitive values
+*.tfvars.local
+secrets.tfvars
+*.auto.tfvars
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Override files (local developer overrides)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AWS credentials (NEVER commit)
+.aws/
+credentials
