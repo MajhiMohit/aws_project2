@@ -2,7 +2,7 @@
 
 [![Terraform Version](https://img.shields.io/badge/Terraform->=1.5.0-blue.svg)](https://www.terraform.io/)
 [![AWS Provider](https://img.shields.io/badge/AWS%20Provider-~>5.0-orange.svg)](https://registry.terraform.io/providers/hashicorp/aws/latest)
-[![Teams](https://img.shields.io/badge/Teams-T052%20|%20T193%20|%20T334-brightgreen.svg)]()
+[![Teams](https://img.shields.io/badge/Teams-%20|%20%20|%20-brightgreen.svg)]()
 [![Students](https://img.shields.io/badge/Total%20Contributors-12%20Students-purple.svg)]()
 
 > A production-grade, standardized **AWS Landing Zone** built using modular Infrastructure as Code (IaC) with **Terraform**, featuring remote state locking (S3 + DynamoDB), security guardrails, mandatory tagging policies, drift detection, and multi-team collaboration workflows.
@@ -13,7 +13,7 @@
 1. [Project Overview & Architecture](#project-overview--architecture)
 2. [Folder Structure & Component Interconnection](#folder-structure--component-interconnection)
 3. [Prerequisites & System Setup](#prerequisites--system-setup)
-4. [Team Task Division (12 Students across 3 Teams)](#team-task-division-12-students-across-3-teams)
+4. [Team Task Division (12 Students across )](#team-task-division-12-students-across-3-teams)
 5. [S3 Remote State & DynamoDB Lock Setup](#s3-remote-state--dynamodb-lock-setup)
 6. [Multi-Team Git/GitHub Workflow & Conflict Prevention](#multi-team-gitgithub-workflow--conflict-prevention)
 7. [Step-by-Step Deployment Commands](#step-by-step-deployment-commands)
@@ -89,19 +89,19 @@ terraform-aws-landing-zone/
 │   ├── outputs.tf                  # Outputs bucket name and lock table name
 │   └── versions.tf                 # Terraform & AWS provider requirements
 ├── modules/                        # Reusable Component Modules
-│   ├── vpc/                        # Module 1: Networking Core (Team T052)
+│   ├── vpc/                        # Module 1: Networking Core (Team )
 │   │   ├── main.tf                 # VPC, IGW, Subnets, Route Tables & Associations
 │   │   ├── variables.tf            # Subnet CIDRs, AZs, VPC CIDR definitions
 │   │   └── outputs.tf              # Returns VPC ID, Subnet IDs for other modules
-│   ├── iam/                        # Module 2: IAM & Identity (Team T193)
+│   ├── iam/                        # Module 2: IAM & Identity (Team )
 │   │   ├── main.tf                 # Roles, Policies, Instance Profiles
 │   │   ├── variables.tf            # Environment & Team tags
 │   │   └── outputs.tf              # Role ARNs & Profile names
-│   ├── security/                   # Module 3: Security & Firewall (Team T193)
+│   ├── security/                   # Module 3: Security & Firewall (Team )
 │   │   ├── main.tf                 # Web/App SG, Restricted SSH, DB isolation SG
 │   │   ├── variables.tf            # VPC ID reference & SSH ingress CIDR
 │   │   └── outputs.tf              # Security Group IDs
-│   └── logging/                    # Module 4: Audit Logging (Team T334)
+│   └── logging/                    # Module 4: Audit Logging (Team )
 │       ├── main.tf                 # CloudTrail & Secure Logging S3 Bucket
 │       ├── variables.tf            # CloudTrail S3 Bucket parameters
 │       └── outputs.tf              # Bucket ARN & Trail ARN
@@ -160,24 +160,24 @@ git config --global user.email "your.email@example.com"
 
 ---
 
-## Team Task Division (12 Students across 3 Teams)
+## Team Task Division (12 Students across )
 
-To ensure seamless coordination without state or file conflicts, the 12 students are divided into 3 specialized teams of 4 members each:
+To ensure seamless coordination without state or file conflicts, the multiple developers are divided into 3 specialized teams of 4 members each:
 
-### Team T052: Networking Core (4 Students)
-* **Student 1 (Team Lead - Networking)**: Manages root `main.tf` VPC module integration and CIDR allocation plan.
+### Team : Networking Core (4 Students)
+* **Student 1 (Lead - Networking)**: Manages root `main.tf` VPC module integration and CIDR allocation plan.
 * **Student 2**: Authors `modules/vpc/main.tf` (VPC, Internet Gateway, Subnet provisioning).
 * **Student 3**: Authors `modules/vpc/variables.tf` & `outputs.tf` (AZ mapping, subnet outputs).
 * **Student 4**: Code reviewer and route table specialist (Public/Private routing logic & testing).
 
-### Team T193: Security & Governance (4 Students)
-* **Student 5 (Team Lead - Security)**: Designs security guardrails and mandatory tagging policies in `provider.tf`.
+### Team : Security & Governance (4 Students)
+* **Student 5 (Lead - Security)**: Designs security guardrails and mandatory tagging policies in `provider.tf`.
 * **Student 6**: Authors `modules/security/main.tf` (Web/App Tier Security Group, SSH restriction).
 * **Student 7**: Authors `modules/security/main.tf` DB isolation rules & `modules/security/variables.tf`.
 * **Student 8**: Authors `modules/iam/main.tf` (Developer roles, IAM policies, instance profiles).
 
-### Team T334: Logging, Backend & Quality Assurance (4 Students)
-* **Student 9 (Team Lead - Ops & QA)**: Builds `bootstrap/` S3 bucket & DynamoDB state locking backend.
+### Team : Logging, Backend & Quality Assurance (4 Students)
+* **Student 9 (Lead - Ops & QA)**: Builds `bootstrap/` S3 bucket & DynamoDB state locking backend.
 * **Student 10**: Authors `modules/logging/main.tf` (CloudTrail configuration & S3 bucket policy).
 * **Student 11**: Manages `backend.tf`, state conflict resolution testing, and drift detection simulation.
 * **Student 12**: Manages GitHub Repository, Pull Requests, documentation, and Viva presentation deck.
@@ -187,7 +187,7 @@ To ensure seamless coordination without state or file conflicts, the 12 students
 ## S3 Remote State & DynamoDB Lock Setup
 
 When multiple students work on the same infrastructure, local state files (`terraform.tfstate`) lead to:
-1. **State Overwrites**: Student A applies changes, overwriting Student B's state file.
+1. **State Overwrites**: Developer A applies changes, overwriting Developer B's state file.
 2. **Race Conditions**: Two students running `terraform apply` at the same second corrupt AWS resources.
 
 ### Solution Architecture: S3 + DynamoDB Mutex Locking
@@ -234,9 +234,9 @@ terraform init
 1. Create a central repository: `github.com/your-org/terraform-aws-landing-zone`.
 2. Protect the `main` branch: Require pull request reviews and passing status checks before merging.
 3. Feature Branch Convention:
-   - `feature/t052-vpc-subnets`
-   - `feature/t193-security-groups`
-   - `feature/t334-cloudtrail-logging`
+   - `feature/vpc-subnets`
+   - `feature/security-groups`
+   - `feature/cloudtrail-logging`
 
 ### Daily Student Workflow
 ```bash
@@ -259,12 +259,12 @@ git add modules/security/
 git commit -m "feat(security): add db security group with ingress restriction"
 git push origin feature/t193-add-db-security-group
 
-# 6. Open a Pull Request (PR) on GitHub for Team Lead review.
+# 6. Open a Pull Request (PR) on GitHub for review.
 ```
 
 ### How State Locking Protects 12 Students
 ```
-Student A (Terminal 1)                   DynamoDB State Lock Table                   Student B (Terminal 2)
+Developer A (Terminal 1)                   DynamoDB State Lock Table                   Developer B (Terminal 2)
         │                                            │                                        │
         ├───────── terraform apply ─────────────────►│                                        │
         │                                            │                                        │
@@ -450,7 +450,7 @@ When presenting this project to evaluation faculty or external reviewers, follow
    - Run `terraform apply` to show automatic state restoration.
 
 5. **Multi-Team Workflow Explanation (0.5 min)**:
-   - Explain how 12 students across Teams T052, T193, and T334 collaborate using GitHub PRs and DynamoDB locking.
+   - Explain how developers collaborate using GitHub pull requests and DynamoDB state locking.
 
 ---
 
@@ -459,14 +459,14 @@ When presenting this project to evaluation faculty or external reviewers, follow
 ### Q1: What is a Terraform Landing Zone and why is it important?
 **Answer**: A Landing Zone is a well-architected, multi-account or multi-subnet AWS baseline environment that configures networking, security controls, IAM, and centralized audit logging before workloads are deployed. Building it with Terraform ensures that the infrastructure is reproducible, version-controlled, audited, and immune to manual setup errors.
 
-### Q2: How does DynamoDB prevent state corruption when 12 students work together?
+### Q2: How does DynamoDB prevent state corruption when multiple developers work together?
 **Answer**: Terraform uses DynamoDB for distributed mutex locking. When a developer executes `terraform plan` or `terraform apply`, Terraform writes an item containing a unique Lock ID to the DynamoDB table. If another developer attempts an apply at the same time, Terraform reads the table, sees the active lock, and rejects the command with an error message until the first developer's run completes and releases the lock.
 
 ### Q3: What is Infrastructure Drift and how does Terraform handle it?
 **Answer**: Drift happens when real-world cloud resources diverge from the configuration stored in `.tfstate` (usually due to manual AWS Console edits or emergency hotfixes). Running `terraform plan` refreshes the current state against AWS APIs, compares it with the `.tf` code, and generates a plan to reverse out-of-band changes to restore the desired declarative state.
 
 ### Q4: Why use Terraform modules instead of a single `main.tf` file?
-**Answer**: Modules promote code reusability, maintainability, and clean separation of concerns. In our 12-student project, modularization allowed Team T052 to work independently on `modules/vpc` without touching Team T193's `modules/security` or Team T334's `modules/logging`.
+**Answer**: Modules promote code reusability, maintainability, and clean separation of concerns. In this project, modularization allowed Team  to work independently on `modules/vpc` without unnecessary changes across unrelated modules.
 
 ### Q5: How do `default_tags` in the AWS Provider work?
 **Answer**: In AWS Provider v4/v5, the `default_tags` block inside the `provider "aws"` definition automatically attaches standard tags (e.g., `Project`, `Environment`, `ManagedBy`) to all taggable AWS resources created by the provider block, eliminating boilerplate code and ensuring 100% compliance with organization tagging guardrails.
@@ -486,9 +486,3 @@ When presenting this project to evaluation faculty or external reviewers, follow
 ### Q10: What happens if a developer forgets to run `terraform fmt`?
 **Answer**: In a CI/CD pipeline (such as GitHub Actions), `terraform fmt -check` is executed as a quality gate. If the code is not formatted according to standard HashiCorp guidelines, the build job fails and blocks the PR from being merged.
 
----
-
-### Project Maintainers & Team Credits
-- **Team T052 (Networking Core)**: 4 Students
-- **Team T193 (Security & Governance)**: 4 Students
-- **Team T334 (Audit Logging & Ops)**: 4 Students
